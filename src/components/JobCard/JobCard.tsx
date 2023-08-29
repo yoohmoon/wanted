@@ -1,6 +1,7 @@
 import React from 'react';
 import { styled } from 'styled-components';
 import { Job } from '../../types/jobListingTypes';
+import { Link } from 'react-router-dom';
 
 interface JobCardProps {
   job: Job;
@@ -11,15 +12,17 @@ const JobCard = ({ job }: JobCardProps) => {
 
   return (
     <Container>
-      <div>
-        <HeadImg img={job.img} />
-        <JobInfo>
-          <JobTitle>{job.employmentTitle}</JobTitle>
-          <Company>{job.companyname}</Company>
-          <Address>{job.address}</Address>
-          <p>채용 보상금 {job.reward}만원</p>
-        </JobInfo>
-      </div>
+      <Link to={`/wd/${job.companyId}`}>
+        <div>
+          <HeadImg img={job.img} />
+          <JobInfo>
+            <JobTitle>{job.employmentTitle}</JobTitle>
+            <Company>{job.companyname}</Company>
+            <Address>{job.address}</Address>
+            <p>채용 보상금 {job.reward}만원</p>
+          </JobInfo>
+        </div>
+      </Link>
     </Container>
   );
 };

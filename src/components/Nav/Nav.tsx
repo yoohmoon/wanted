@@ -52,9 +52,13 @@ const Nav = () => {
 };
 
 const Container = styled.div`
+  position: fixed;
+  top: 0;
   border-bottom: 1px solid ${(props) => props.theme.borderGray};
+  width: 100%;
   height: 50px;
   line-height: 50px;
+  background-color: #fff;
   font-size: 14px;
 `;
 

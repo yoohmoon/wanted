@@ -19,6 +19,7 @@ const MainLayout = () => {
 
 const Wrapper = styled.div`
   margin: 0 226px;
+  padding-top: 50px;
 `;
 
 export default MainLayout;
