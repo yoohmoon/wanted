@@ -80,7 +80,7 @@ code {
         font-family: 'PretendardVariable';
         src: url('/fonts/PretendardVariable.woff2');
         font-style: normal;
-        font-weight: 600;
+        /* font-weight: 600; */
     }
 
     li{

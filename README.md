@@ -2,6 +2,7 @@
 
 # 폴더 구조
 
+```
 public
 ├── data
 │ └── data.json
@@ -43,6 +44,7 @@ src
 
 ├── Router.tsx
 └── index.tsx
+```
 
 ## Available Script
 
