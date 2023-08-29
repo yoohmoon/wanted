@@ -13,6 +13,7 @@ const Container = styled.div`
   display: inline-block;
   background-color: ${({ theme }) => theme.tagGray};
   padding: 9px 14px;
+  margin-right: 6px;
   border-radius: 25px;
   font-size: 12px;
   cursor: pointer;

@@ -2,8 +2,16 @@ import React from 'react';
 import { styled } from 'styled-components';
 import ResponseRate from '../../components/ResponseRateTag/ResponseRate';
 import HashTag from '../../components/HashTags/HashTag';
+import useFetch from '../../hooks/useFetch';
+import { JobDetailResponse } from '../../types/jobDetailType';
 
 const ListingDetail = () => {
+  const url = `/data/jobDetailData1.json`;
+  const { loading, data, error } = useFetch<JobDetailResponse>(url);
+  console.log('hook? ', data?.result);
+  const jobData = data?.result;
+  console.log('hook??? ', data?.result);
+
   return (
     <Container>
       <DetailMain>
@@ -18,19 +26,21 @@ const ListingDetail = () => {
             </Carousel>
           </section>
           <DetailTitleContainer>
-            <JobTitle>QA 엔지니어</JobTitle>
+            <JobTitle>{jobData?.employmentTitle}</JobTitle>
             <DetailInfoWrap>
-              <div>아이엠폼</div>
+              <div>{jobData?.companyname}</div>
               <ResponseRate />
               <Separator />
-              <AddressShort>서울.한국</AddressShort>
+              <AddressShort>{jobData?.addressShort}</AddressShort>
             </DetailInfoWrap>
             <ThemeTagsContainer>
-              <HashTag text='hello' />
+              {jobData?.themeTags.map((theme) => (
+                <HashTag text={theme.title} />
+              ))}
             </ThemeTagsContainer>
           </DetailTitleContainer>
           <section>
-            <MainContent>회사 소개 메인글 </MainContent>
+            <MainContent>{jobData?.employmentContents} </MainContent>
             <div>
               <TechStack>기술스택 ・ 툴</TechStack>
             </div>
