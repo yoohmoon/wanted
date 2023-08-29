@@ -9,6 +9,8 @@ const theme = {
   footerTitle: '#3a3a3a',
   footerText: '#767676',
   borderGray: '#e1e2e3',
+  tagGray: '#f3f5f8',
+  mainFont: 'PretendardVariable',
 };
 
 export default theme;

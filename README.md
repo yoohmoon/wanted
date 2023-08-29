@@ -1,24 +1,24 @@
-# Getting Started with Create React App
+# Wanted
 
-# 폴더 구조
+## 폴더 구조
 
 ```
 public
 ├── data
-│ └── data.json
+│ └── cardData.json
 ├── images
-│ ├── codeKim
+│ ├── Detail
 │ │ └── bts.png
-│ └── gaebalKim
-│ └── army.png
+│ └──
+│ └──
 ├── favicon.ico
 └── index.html
 
 src
 ├── assets
-│ ├── codeKim
+│ ├──
 │ │ └── heart.jpg
-│ └── gaebalKim
+│ └──
 ├── components
 │ └── Nav
 │ ├── Nav.tsx
