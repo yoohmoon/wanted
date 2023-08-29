@@ -20,18 +20,18 @@ src
 │ │ └── heart.jpg
 │ └──
 ├── components
-│ └── Nav
-│ ├── Nav.tsx
-│ └──
+│ ├──Nav
+│ │ └──Nav.tsx
+│ │ └── components
+│ │   └──Logo.tsx
+│ ├──ResponseRateTag
+│ │ └── ResponseRateTag.tsx
+
 ├── pages
-│ ├── codeKim
-│ │ ├── Login
-│ │ │ ├── Login.tsx
-│ │ │ └──
-│ │ └── Main
-│ │ ├── Main.tsx
-│ │ └──
-│ └── gaebalKim
+│ ├── JobListings
+│ │ └── JobListings.tsx
+│ ├── ListingDetail
+│ │ └──  ListingDetail.tsx
 │ ├── Login
 │ │ ├── Login.tsx
 │ │ └──
