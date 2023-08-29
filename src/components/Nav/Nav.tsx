@@ -83,6 +83,7 @@ const NavList = styled.div`
   display: flex;
   gap: 30px;
   font-family: 'PretendardVariable';
+  font-weight: 600;
   cursor: pointer;
 `;
 

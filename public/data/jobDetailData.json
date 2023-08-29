@@ -1,0 +1,101 @@
+{
+  "resultCode": "SUCCESS",
+  "message": "채용공고 작성이 완료되었습니다.",
+  "result": [
+    {
+      "images": [
+        {
+          "id": 1,
+          "src": "https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fcompany%2F2134%2Fdz1ns2td09zk9lh6__1080_790.jpg&w=1000&q=75"
+        },
+        {
+          "id": 2,
+          "src": "https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fcompany%2F2134%2Fpwvoogocojjt9b4h__1080_790.jpg&w=1000&q=75"
+        },
+        {
+          "id": 3,
+          "src": "https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fcompany%2F2134%2Fuofquswyujy0em14__1080_790.jpg&w=1000&q=75"
+        },
+        {
+          "id": 4,
+          "src": "https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fcompany%2F2134%2Fhigpsvtg5glj4xyw__1080_790.jpg&w=1000&q=75"
+        },
+        {
+          "id": 5,
+          "src": "https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fcompany%2F2134%2Fgxt1gzr6r6akj62l__1080_790.jpg&w=1000&q=75"
+        },
+        {
+          "id": 6,
+          "src": "https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fcompany%2F2134%2Filucqeqmfd4j9mwb__1080_790.jpg&w=1000&q=75"
+        },
+        {
+          "id": 7,
+          "src": "https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fcompany%2F2134%2Ftpu0qcvle1datx06__1080_790.jpg&w=1000&q=75"
+        }
+      ],
+      "themeTags": [
+        { "id": 1, "title": "#퇴사율5%이하" },
+        { "id": 2, "title": "#설립10년이상" },
+        { "id": 3, "title": "#리프레시휴가" },
+        { "id": 4, "title": "#교육비" },
+        { "id": 5, "title": "#자기계발" },
+        { "id": 6, "title": "#핀테크" },
+        { "id": 7, "title": "#IT, 컨텐츠" }
+      ],
+
+      "employmentTitle": "QA 엔지니어",
+      "employmentContents": "아이엠폼에서 찾는 QA 엔지니어는 웹 서비스, 솔루션 개발을 위한 기획 단계에서부터 서비스를 분석하고 테스트 환경을 구축하며, 개발 과정 동안  테스트를 진행하면서 프로젝트의 성공을 돕는 역할을 하는 사람입니다.",
+      "addressShort": "서울.한국",
+      "address": "서울특별시 서대문구 홍제1동 유원하나아프트",
+      "deadline": "상시",
+      "applicantReward": "500000",
+      "recommenderReward": "500000",
+      "companyname": "랩시내틱스",
+      "companyId": 1
+    },
+    {
+      "images": [
+        {
+          "id": 1,
+          "src": "https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fcompany%2F2134%2Fdz1ns2td09zk9lh6__1080_790.jpg&w=1000&q=75"
+        },
+        {
+          "id": 2,
+          "src": "https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fcompany%2F2134%2Fpwvoogocojjt9b4h__1080_790.jpg&w=1000&q=75"
+        },
+        {
+          "id": 3,
+          "src": "https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fcompany%2F2134%2Fpwvoogocojjt9b4h__1080_790.jpg&w=1000&q=75"
+        },
+        {
+          "id": 4,
+          "src": "https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fcompany%2F2134%2Fpwvoogocojjt9b4h__1080_790.jpg&w=1000&q=75"
+        },
+        {
+          "id": 5,
+          "src": "https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fcompany%2F2134%2Fpwvoogocojjt9b4h__1080_790.jpg&w=1000&q=75"
+        },
+        {
+          "id": 6,
+          "src": "https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fcompany%2F2134%2Fpwvoogocojjt9b4h__1080_790.jpg&w=1000&q=75"
+        }
+      ],
+      "themeTags": [
+        { "id": 2, "title": "#설립10년이상" },
+        { "id": 3, "title": "#리프레시휴가" },
+        { "id": 4, "title": "#교육비" },
+        { "id": 6, "title": "#핀테크" },
+        { "id": 7, "title": "#IT, 컨텐츠" }
+      ],
+      "employmentTitle": "백엔드 개발자",
+      "employmentContents": "아이엠폼에서 찾는 QA 엔지니어는 웹 서비스, 솔루션 개발을 위한 기획 단계에서부터 서비스를 분석하고 테스트 환경을 구축하며, 개발 과정 동안  테스트를 진행하면서 프로젝트의 성공을 돕는 역할을 하는 사람입니다.",
+      "addressShort": "서울.한국",
+      "address": "서울특별시 서대문구 홍제1동 유원하나아프트",
+      "deadline": "상시",
+      "applicantReward": "500000",
+      "recommenderReward": "500000",
+      "companyname": "아이엠폼",
+      "companyId": 2
+    }
+  ]
+}
