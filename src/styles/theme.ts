@@ -8,6 +8,7 @@ const theme = {
   bgMint: '#e4f4ec',
   footerTitle: '#3a3a3a',
   footerText: '#767676',
+  borderGray: '#e1e2e3',
 };
 
 export default theme;
