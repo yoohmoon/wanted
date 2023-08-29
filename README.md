@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# Wanted
 
-# 폴더 구조
+## 폴더 구조
 
 ```
 public

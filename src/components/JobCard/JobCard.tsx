@@ -2,6 +2,7 @@ import React from 'react';
 import { styled } from 'styled-components';
 import { Job } from '../../types/jobListingTypes';
 import { Link } from 'react-router-dom';
+import ResponseRate from '../ResponseRateTag/ResponseRate';
 
 interface JobCardProps {
   job: Job;
@@ -18,6 +19,9 @@ const JobCard = ({ job }: JobCardProps) => {
           <JobInfo>
             <JobTitle>{job.employmentTitle}</JobTitle>
             <Company>{job.companyname}</Company>
+            <ResponseTag>
+              <ResponseRate />
+            </ResponseTag>
             <Address>{job.address}</Address>
             <p>채용 보상금 {job.reward}만원</p>
           </JobInfo>
@@ -56,6 +60,10 @@ const JobTitle = styled.p`
 const Company = styled.p`
   margin-top: 10px;
   font-weight: 600;
+`;
+
+const ResponseTag = styled.div`
+  margin-top: 4px;
 `;
 
 const Address = styled.p`
