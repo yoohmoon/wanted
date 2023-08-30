@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import { FC, useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import styled from 'styled-components';
 import Logo from '../../components/Nav/components/Logo';
@@ -7,43 +7,7 @@ type FormValues = {
   email: string;
 };
 
-/* 
-<input
-                type='email'
-                placeholder='이메일을 입력해주세요.'
-                // name='email'
-                {...register('email', {
-                  required: true,
-                  pattern: {
-                    value: emailRegEx,
-                    message: '유효한 이메일을 입력하세요.',
-                  },
-                })}
-              />
-*/
-
-/* const resolver: Resolver<FormValues> = async (values) => {
-  return {
-    values: values.email ? values : {},
-    errors: !values.email
-      ? {
-          email: {
-            type: 'required',
-            message: '유효한 이메일을 입력하세요.',
-          },
-        }
-      : {},
-  };
-}; */
-
 const Login: FC = () => {
-  /*   const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormValues>({ resolver });
-  // console.log(watch());
- */
   const {
     register,
     handleSubmit,
@@ -52,13 +16,7 @@ const Login: FC = () => {
     clearErrors,
     formState: { errors },
   } = useForm<FormValues>();
-  console.log(errors);
-
-  // const onSubmitHandler: submitHandler<FormValue> = (data) => {
-  //   console.log(data)
-  // }
-
-  const [emailErrorMsg, setEmailErrorMsg] = useState('');
+  // console.log(errors);
 
   const email = watch('email');
 
@@ -66,13 +24,11 @@ const Login: FC = () => {
     const isValid = emailRegEx.test(email);
     if (!isValid && email) {
       console.log('error msg!');
-      // setEmailErrorMsg('유효한 이메일을 입력하세용!!!@@');
       setError('email', {
         type: 'manual',
         message: '올바른 이메일을 입력해주세요.',
       });
     } else {
-      // setEmailErrorMsg('');
       clearErrors('email');
     }
   }, [email, setError, clearErrors]);
@@ -104,53 +60,17 @@ const Login: FC = () => {
           <LoginForm onSubmit={handleSubmit(onSubmit)}>
             <InputBox>
               <EmailTitle>이메일</EmailTitle>
-              {/* <EmailInput
-                hasError={!!errors?.email}
-                placeholder='이메일을 입력해주세요.'
-                {...register('email', {
-                  required: '이메일을 입력해주세요.',
-                  pattern: {
-                    value:
-                      /^[A-Za-z0-9]([-_.]?[A-Za-z0-9])*@[A-Za-z0-9]([-_.]?[A-Za-z0-9])*\.[A-Za-z]{2,3}$/,
-                    message: '유효한 이메일을 입력하세요.',
-                  },
-                })}
-                type='email'
-              /> */}
               <EmailInput
                 {...register('email', {
                   required: true,
                   validate: (value) =>
                     emailRegEx.test(value) || '유효한 이메일을 입력해주세요.',
-                  // pattern:
-                  //   /^[A-Za-z0-9]([-_.]?[A-Za-z0-9])*@[A-Za-z0-9]([-_.]?[A-Za-z0-9])*\.[A-Za-z]{2,3}$/,
                 })}
                 type='email'
                 placeholder='이메일을 입력해주세요.'
                 hasError={!!errors?.email}
-                // data-hasError={!!errors?.email}
               />
-              {/* {errors.email && errors.email.type === 'pattern' && (
-                <ErrorMsg>유효한 이메일을 입력해주세요.</ErrorMsg>
-              )} */}
-              {/* {errors.email && <ErrorMsg>{errors.email.message}</ErrorMsg>} */}
               {errors.email && <ErrorMsg>{errors.email.message}</ErrorMsg>}
-              {/* {emailErrorMsg && <ErrorMsg>{emailErrorMsg}</ErrorMsg>} */}
-              {/* {errors.email && (
-                <ErrorMsg>
-                  {errors.email.type === 'required' && '이메일을 입력해주세요.'}
-                  {errors.email.type === 'pattern' &&
-                    '유효한 이메일을 입력해주세요.'}
-                </ErrorMsg>
-              )} */}
-              {/* {errors.name && errors.name.type === "required" && (
-        		<div>이름을 입력해 주세요!</div>
-        	)}
-        	{errors.name && errors.name.type === "maxLength" && (
-        		<div>이름은 최대 20자만 입력할 수 있습니다!</div>
-        	)} */}
-              {/* <input {...register("email", { required: true, pattern: /^\S+@\S+$/i })} type="email" /> */}
-              {/* {errors?.email && <ErrorMsg>{errors.email.message}</ErrorMsg>} */}
             </InputBox>
             <EmailBtn type='submit' disabled={!email || !!errors.email}>
               <span>이메일로 계속하기</span>
