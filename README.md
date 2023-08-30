@@ -46,6 +46,18 @@ src
 └── index.tsx
 ```
 
+<br/>
+
+---
+
+## Tech
+
+<h2> tech stack 📚 </h2>
+
+![TypeScript](https://img.shields.io/badge/-TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+![React](https://img.shields.io/badge/-React-222222?style=for-the-badge&logo=react)
+![Styled Components](https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white)
+
 ## Available Script
 
 In the project directory, you can run:
