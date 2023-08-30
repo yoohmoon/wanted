@@ -8,9 +8,9 @@ import { JobDetailResponse } from '../../types/jobDetailType';
 const ListingDetail = () => {
   const url = `/data/jobDetailData1.json`;
   const { loading, data, error } = useFetch<JobDetailResponse>(url);
-  console.log('hook? ', data?.result);
+  // console.log('hook? ', data?.result);
   const jobData = data?.result;
-  console.log('hook??? ', data?.result);
+  // console.log('hook??? ', data?.result);
 
   return (
     <Container>

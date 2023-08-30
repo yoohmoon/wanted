@@ -10,7 +10,16 @@ const theme = {
   footerText: '#767676',
   borderGray: '#e1e2e3',
   tagGray: '#f3f5f8',
+  loginBg: '#f7f7f7',
+  loginGray: '#888888',
+  alertRed: '#fe415c',
+  disabledGray: '#f2f4f7',
   mainFont: 'PretendardVariable',
+  fontBlack: 'Pretendard-Black',
+  fontReg: 'Pretendard-Regular',
+  fontMd: 'Pretendard-Medium',
+  fontSb: 'Pretendard-SemiBold',
+  fontThin: 'Pretendard-Thin',
 };
 
 export default theme;
