@@ -1,13 +1,20 @@
 import { FC, useEffect } from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { useRecoilState } from 'recoil';
+import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import styled from 'styled-components';
+import { emailState } from '../../store/emailState';
+import { loginStepState } from '../../store/loginStepState';
 import Logo from '../../components/Nav/components/Logo';
-
-type FormValues = {
-  email: string;
-};
+import SignUp from './components/SignUp';
+import InputForm from './components/InputForm';
+import SubmitBtn from './components/SubmitBtn';
 
 const Login: FC = () => {
+  // 단계 로그인/회원가입 회원가입 로직
+  const [step, setStep] = useRecoilState(loginStepState);
+
+  const [emailRoot, setEmailRoot] = useRecoilState(emailState);
+
   const {
     register,
     handleSubmit,
@@ -15,7 +22,7 @@ const Login: FC = () => {
     setError,
     clearErrors,
     formState: { errors },
-  } = useForm<FormValues>();
+  } = useForm<FieldValues>();
   // console.log(errors);
 
   const email = watch('email');
@@ -33,8 +40,10 @@ const Login: FC = () => {
     }
   }, [email, setError, clearErrors]);
 
-  const onSubmit: SubmitHandler<FormValues> = (data) => {
+  const onSubmit: SubmitHandler<FieldValues> = (data) => {
     console.log(data);
+    setEmailRoot(data.email);
+    setStep('signUp');
   };
 
   const emailRegEx =
@@ -44,38 +53,48 @@ const Login: FC = () => {
     <Container>
       <Wrapper>
         <LoginBox>
-          <LogoWrap>
-            <Logo />
-          </LogoWrap>
-          <CatchPhrase>
-            <h4>
-              하나의 계정으로 <br />
-              더욱 편리하게
-            </h4>
-          </CatchPhrase>
-          <Explanation>
-            원티드가 제공하는 서비스를 <br />
-            하나의 계정으로 모두 이용할 수 있습니다.
-          </Explanation>
-          <LoginForm onSubmit={handleSubmit(onSubmit)}>
-            <InputBox>
-              <EmailTitle>이메일</EmailTitle>
-              <EmailInput
-                {...register('email', {
-                  required: true,
-                  validate: (value) =>
-                    emailRegEx.test(value) || '유효한 이메일을 입력해주세요.',
-                })}
-                type='email'
-                placeholder='이메일을 입력해주세요.'
-                hasError={!!errors?.email}
-              />
-              {errors.email && <ErrorMsg>{errors.email.message}</ErrorMsg>}
-            </InputBox>
-            <EmailBtn type='submit' disabled={!email || !!errors.email}>
-              <span>이메일로 계속하기</span>
-            </EmailBtn>
-          </LoginForm>
+          {step === 'emailInput' && (
+            <>
+              <LogoWrap>
+                <Logo />
+              </LogoWrap>
+              <CatchPhrase>
+                <h4>
+                  하나의 계정으로 <br />
+                  더욱 편리하게
+                </h4>
+              </CatchPhrase>
+              <Explanation>
+                원티드가 제공하는 서비스를 <br />
+                하나의 계정으로 모두 이용할 수 있습니다.
+              </Explanation>
+              <LoginForm onSubmit={handleSubmit(onSubmit)}>
+                <InputForm
+                  title='이메일'
+                  type='email'
+                  placeholder='이메일을 입력해주세요.'
+                  register={register}
+                  validate={(value: string) =>
+                    emailRegEx.test(value) || '유효한 이메일을 입력해주세요.'
+                  }
+                  errors={errors}
+                  name='email'
+                  readOnly={false}
+                  isPhone={false}
+                />
+                <SubmitBtn
+                  title='이메일로 계속하기'
+                  disabledCon={!email || !!errors.email}
+                />
+
+                {/* <EmailBtn type='submit' disabled={!email || !!errors.email}>
+                  <span>이메일로 계속하기</span>
+                </EmailBtn> */}
+              </LoginForm>
+            </>
+          )}
+          {step === 'passwordInput' && <p>Password Login Layout</p>}
+          {step === 'signUp' && <SignUp />}
         </LoginBox>
       </Wrapper>
     </Container>
@@ -101,12 +120,21 @@ const Wrapper = styled.div`
 `;
 const LoginBox = styled.main`
   max-width: 400px;
+  max-height: calc(100vh - 100px);
   padding: 20px;
   margin: 0 auto;
   border-radius: 4px;
   border: 1px solid ${({ theme }) => theme.borderGray};
   background-color: #fff;
   text-align: center;
+  overflow: auto;
+
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
 `;
 
 const LogoWrap = styled.div`
@@ -138,92 +166,6 @@ const LoginForm = styled.form`
   text-align: left;
   font-size: 14px;
   color: ${({ theme }) => theme.loginGray};
-`;
-
-const InputBox = styled.div`
-  width: 100%;
-  text-align: left;
-  font-size: 14px;
-  color: ${({ theme }) => theme.loginGray};
-
-  /* input {
-    width: 100%;
-    min-height: 50px;
-    padding: 0 12px;
-    margin-bottom: 8px;
-    border: 1px solid ${({ theme }) => theme.borderGray};
-    border-radius: 5px;
-    outline: none;
-    font-size: 16px;
-
-    &:focus {
-      border: 1px solid ${({ theme }) => theme.mainBlue};
-      border-radius: 5px;
-    }
-  } */
-`;
-
-const EmailInput = styled.input<{ hasError: boolean }>`
-  width: 100%;
-  /* height: 50px; */
-  min-height: 50px;
-  padding: 0 12px;
-  margin-bottom: 8px;
-
-  /* border: 1px solid ${({ theme }) => theme.borderGray}; */
-  border: 1px solid
-    ${({ hasError, theme }) => (hasError ? theme.alertRed : theme.borderGray)};
-  border-radius: 5px;
-  outline: none;
-  font-size: 16px;
-
-  /* &:focus {
-    border: 1px solid ${({ theme }) => theme.mainBlue};
-    border-radius: 5px;
-  } */
-
-  &:focus {
-    border: 1px solid
-      ${({ hasError, theme }) => (hasError ? theme.alertRed : theme.mainBlue)};
-  }
-
-  /* &:not([hasError='true']):focus {
-    border: 1px solid ${({ theme }) => theme.mainBlue};
-    border-radius: 5px;
-  } */
-
-  /* &:not([data-hasError='true']):focus {
-    border: 1px solid ${({ theme }) => theme.mainBlue};
-  } */
-`;
-
-const EmailTitle = styled.div`
-  margin-top: 17px;
-  margin-bottom: 7px;
-  font-weight: 600;
-`;
-
-const ErrorMsg = styled.p`
-  color: ${({ theme }) => theme.alertRed};
-`;
-
-const EmailBtn = styled.button<{ disabled: boolean }>`
-  width: 100%;
-  min-height: 50px;
-  padding: 1px 6px;
-  margin-top: 30px;
-  margin-bottom: 10px;
-  border-radius: 25px;
-  border: none;
-  font-size: 16px;
-
-  background-color: ${({ disabled, theme }) =>
-    disabled ? theme.disabledGray : theme.mainBlue};
-  cursor: ${({ disabled }) => (disabled ? 'default' : 'pointer')};
-
-  span {
-    color: ${({ disabled }) => (disabled ? '#ccc' : '#fff')};
-  }
 `;
 
 export default Login;
