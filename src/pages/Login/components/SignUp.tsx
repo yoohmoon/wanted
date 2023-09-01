@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import styled from 'styled-components';
 import { emailState } from '../../../store/emailState';
@@ -8,15 +8,33 @@ import InputForm from './InputForm';
 import SubmitBtn from './SubmitBtn';
 import CountryCodeSelect from './CountryCodeSelect';
 import SingleInput from './SingleInput';
+import { useNavigate } from 'react-router-dom';
+import { loginStepState } from '../../../store/loginStepState';
 
 // RegExp 상수화
 const NAME_REGEX = /^[a-zA-Zㄱ-ㅎㅏ-ㅣ가-힣]*$/;
 const PHONE_REGEX = /^01(?:0|1|[6-9])(?:\d{3}|\d{4})\d{4}$/;
 const PASSWORD_REGEX = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,16}$/;
 
+// Type Safety 상수화
+const FIELD_NAME = 'name';
+const FIELD_PHONE = 'phone';
+const FIELD_PASSWORD = 'password';
+const FIELD_PASSWORD_CONFIRMATION = 'passwordConfirmation';
+const FIELD_AUTH = 'auth';
+const FIELD_EMAIL = 'email';
+
 const SignUp = () => {
   const emailRoot = useRecoilValue(emailState);
   console.log('sign up 이메일? !! ', emailRoot);
+
+  // api 상태 관리
+  const [apiStatus, setApiStatus] = useState<string | null>(null);
+
+  // const [step, setStep] = useRecoilState(loginStepState);
+  const setStep = useSetRecoilState(loginStepState);
+
+  const navigate = useNavigate();
 
   const {
     register,
@@ -28,7 +46,11 @@ const SignUp = () => {
   } = useForm<FieldValues>();
   console.log('회원가입 폼 이름 에러', errors);
 
-  const name = watch('name');
+  // watch to individual input by name
+  const name = watch(FIELD_NAME);
+  const phone = watch(FIELD_PHONE);
+  const password = watch(FIELD_PASSWORD);
+  const passwordConfirmation = watch(FIELD_PASSWORD_CONFIRMATION);
 
   useEffect(() => {
     const isValid = NAME_REGEX.test(name);
@@ -52,8 +74,6 @@ const SignUp = () => {
       return true;
     }
   };
-
-  const phone = watch('phone');
 
   useEffect(() => {
     handlePhoneValidation(phone);
@@ -88,16 +108,12 @@ const SignUp = () => {
   };
 
   const handlePasswordConfirmation = (value: string) => {
-    const password = watch('password'); //삭제하기!
     if (value !== password) {
       return '비밀번호가 서로 일치하지 않습니다.';
     } else {
       return true;
     }
   };
-
-  const password = watch('password');
-  const passwordConfirmation = watch('passwordConfirmation');
 
   useEffect(() => {
     const isPasswordValid = PASSWORD_REGEX.test(password);
@@ -122,21 +138,33 @@ const SignUp = () => {
     }
   }, [passwordConfirmation]);
 
+  // api 통신 로직
   const postSignUpData = async (data: FieldValues) => {
-    const response = await fetch('api/v1/users/join', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
+    try {
+      const response = await fetch('api/v1/users/join', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
 
-    const result = await response.json();
+      const result = await response.json();
+      setApiStatus(result.resultCode);
 
-    if (result.resultCode === 'SUCCESS') {
-      console.log('회원가입 성공');
-    } else {
-      console.log('회원가입 실패');
+      if (result.resultCode === 'SUCCESS') {
+        console.log('회원가입 성공');
+        // ✔️ 로그인 페이지로 이동(?!) 로직 구현 필요
+        navigate('/login'); // 필요 없을 듯?
+        setStep('emailInput');
+      } else {
+        console.log('회원가입 실패');
+        // 회원가입 실패시 로직 구현 필요 - 에러 메시지 출력 ?! alert?
+        alert('회원가입에 실패했습니다.');
+      }
+    } catch (error) {
+      console.log('API 호출 중 에러 발생: ', error);
+      setApiStatus('ERROR');
     }
   };
 
@@ -202,7 +230,7 @@ const SignUp = () => {
           register={register}
           validate={handleNameValidation}
           errors={errors}
-          name='name'
+          name={FIELD_NAME}
           readOnly={false}
           isPhone={false}
         />
@@ -213,7 +241,7 @@ const SignUp = () => {
           register={register}
           validate={handlePhoneValidation}
           errors={errors}
-          name='phone'
+          name={FIELD_PHONE}
           readOnly={false}
           isPhone={true}
           phoneDisableCon={!isPhoneValid}
@@ -244,7 +272,7 @@ const SignUp = () => {
           register={register}
           validate={handlePasswordValidation}
           errors={errors}
-          name='password'
+          name={FIELD_PASSWORD}
           readOnly={false}
           isPhone={false}
         ></InputForm>
@@ -254,7 +282,7 @@ const SignUp = () => {
           register={register}
           validate={handlePasswordConfirmation}
           errors={errors}
-          name='passwordConfirmation'
+          name={FIELD_PASSWORD_CONFIRMATION}
         />
         <PasswordWarning>
           영문 대소문자, 숫자, 특수문자를 3가지 이상으로 조합해 8자 이상 16자

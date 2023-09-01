@@ -43,6 +43,8 @@ const Login: FC = () => {
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     console.log(data);
+
+    // 이 이메일 데이터를 기반으로 백엔드 api로 보내서, 해당 이메일이 회원인 이메일인지, 아니면 회원이 아닌 이메일인지 판별해야함!
     setEmailRoot(data.email);
     // setStep('signUp');
     setStep('passwordInput');
