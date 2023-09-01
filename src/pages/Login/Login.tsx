@@ -8,6 +8,7 @@ import Logo from '../../components/Nav/components/Logo';
 import SignUp from './components/SignUp';
 import InputForm from './components/InputForm';
 import SubmitBtn from './components/SubmitBtn';
+import PasswordLogin from './components/PasswordLogin';
 
 const Login: FC = () => {
   // 단계 로그인/회원가입 회원가입 로직
@@ -43,7 +44,8 @@ const Login: FC = () => {
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     console.log(data);
     setEmailRoot(data.email);
-    setStep('signUp');
+    // setStep('signUp');
+    setStep('passwordInput');
   };
 
   const emailRegEx =
@@ -93,7 +95,7 @@ const Login: FC = () => {
               </LoginForm>
             </>
           )}
-          {step === 'passwordInput' && <p>Password Login Layout</p>}
+          {step === 'passwordInput' && <PasswordLogin />}
           {step === 'signUp' && <SignUp />}
         </LoginBox>
       </Wrapper>

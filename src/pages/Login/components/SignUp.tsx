@@ -1,20 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
+import styled from 'styled-components';
 import { emailState } from '../../../store/emailState';
 import Header from './Header';
 import InputForm from './InputForm';
 import SubmitBtn from './SubmitBtn';
 import CountryCodeSelect from './CountryCodeSelect';
 import SingleInput from './SingleInput';
-import { styled } from 'styled-components';
+
+// RegExp 상수화
+const NAME_REGEX = /^[a-zA-Zㄱ-ㅎㅏ-ㅣ가-힣]*$/;
+const PHONE_REGEX = /^01(?:0|1|[6-9])(?:\d{3}|\d{4})\d{4}$/;
+const PASSWORD_REGEX = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,16}$/;
 
 const SignUp = () => {
   const emailRoot = useRecoilValue(emailState);
   console.log('sign up 이메일? !! ', emailRoot);
-
-  const nameRegEx = /^[a-zA-Zㄱ-ㅎㅏ-ㅣ가-힣]*$/;
-  // const phoneRegEx = /^\d{3}-\d{3,4}-\d{4}$/;
 
   const {
     register,
@@ -29,7 +31,7 @@ const SignUp = () => {
   const name = watch('name');
 
   useEffect(() => {
-    const isValid = nameRegEx.test(name);
+    const isValid = NAME_REGEX.test(name);
     if (!isValid && name) {
       console.log('error msg!');
       setError('name', {
@@ -44,7 +46,7 @@ const SignUp = () => {
   const handleNameValidation = (value: string) => {
     if (!value && phone) {
       return '이름을 입력해주세요.';
-    } else if (!nameRegEx.test(value)) {
+    } else if (!NAME_REGEX.test(value)) {
       return '이름에는 공백과 특수문자가 포함될 수 없습니다.';
     } else {
       return true;
@@ -60,11 +62,9 @@ const SignUp = () => {
   const [isPhoneValid, setIsPhoneValid] = useState(false);
 
   const handlePhoneValidation = (value: string) => {
-    const phoneRegEx = /^01(?:0|1|[6-9])(?:\d{3}|\d{4})\d{4}$/;
-
     if (!value) {
       setIsPhoneValid(false);
-    } else if (!phoneRegEx.test(value)) {
+    } else if (!PHONE_REGEX.test(value)) {
       setIsPhoneValid(false);
       setError('phone', {
         type: 'manual',
@@ -77,11 +77,10 @@ const SignUp = () => {
   };
 
   // Password Validation
-  const passwordRegEx = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,16}$/;
   const handlePasswordValidation = (value: string) => {
     if (!value) {
       return '비밀번호를 입력해주세요.';
-    } else if (!passwordRegEx.test(value)) {
+    } else if (!PASSWORD_REGEX.test(value)) {
       return '올바르지 않은 비밀번호입니다.';
     } else {
       return true;
@@ -101,7 +100,7 @@ const SignUp = () => {
   const passwordConfirmation = watch('passwordConfirmation');
 
   useEffect(() => {
-    const isPasswordValid = passwordRegEx.test(password);
+    const isPasswordValid = PASSWORD_REGEX.test(password);
     if (!isPasswordValid && password) {
       setError('password', {
         type: 'manual',
@@ -168,6 +167,16 @@ const SignUp = () => {
 
     postSignUpData(signUpData);
   };
+
+  //버튼 비활성화 조건
+  const hasEmptyFields = !name || !phone || !password || !passwordConfirmation;
+  const hasInputErrors =
+    !!errors.name ||
+    !!errors.phone ||
+    !!errors.password ||
+    !!errors.passwordConfirmation;
+  const isButtonDisabled = hasEmptyFields || hasInputErrors;
+
   return (
     <>
       <HeaderWrap>
@@ -252,7 +261,7 @@ const SignUp = () => {
           이하로 입력해주세요.
         </PasswordWarning>
         <ButtonWrap>
-          <SubmitBtn title='가입하기' disabledCon={false} />
+          <SubmitBtn title='가입하기' disabledCon={isButtonDisabled} />
         </ButtonWrap>
       </form>
     </>
