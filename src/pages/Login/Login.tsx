@@ -41,9 +41,45 @@ const Login: FC = () => {
     }
   }, [email, setError, clearErrors]);
 
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     console.log(data);
+    //이메일 리코일에 등록하는 로직 필요할 듯
+    // console.log(emailRoot);
 
+    setEmailRoot(data.email);
+    // console.log(emailRoot);
+    /* 
+    // 통신용 코드 !
+    try {
+      const response = await fetch('api/v1/users/email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email: data.email }),
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        console.log('result 백엔드 응답 ? ', result);
+
+        if (result.resultCode === 'SUCCESS') {
+          console.log('회원인 이메일입니다!');
+          setStep('passwordInput');
+        } else {
+          console.log('회원이 아닌 이메일입니다!');
+          setStep('signUp');
+        }
+
+    setEmailRoot(data.email); // 확인 필요
+
+      }
+    } catch (error) {
+      console.error('오류 발생! ', error);
+    }
+ */
+
+    // 개발용 임시 코드 - ( 기존 코드 삭제 예정 )
     // 이 이메일 데이터를 기반으로 백엔드 api로 보내서, 해당 이메일이 회원인 이메일인지, 아니면 회원이 아닌 이메일인지 판별해야함!
     setEmailRoot(data.email);
     // setStep('signUp');

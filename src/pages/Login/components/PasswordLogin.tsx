@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Header from './Header';
 import InputForm from './InputForm';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
@@ -22,12 +22,22 @@ const PasswordLogin = () => {
     clearErrors,
     formState: { errors },
   } = useForm();
+  console.log('비밀번호 에러', errors);
 
   const [buttonDisabled, setButtonDisabled] = React.useState(true); // 버튼 비활성화 상태
   const password = watch('password');
 
   const handleLoginPwValidation = (value: string) => {}; //필요하다면 로직구현 (통신 후 맞지 않는 비번이면 오류 출력)
   const buttonDisabledCondition = !password || buttonDisabled; // 문자 하나만 입력돼도 활성화됨,,(통신 후 맞지 않는 비번이면 버튼 비활성화)
+
+  //통신 전 코드 (통신 성공 후 삭제할 것) - 버튼 비활성화되는 걸 임시로 막아둠
+  useEffect(() => {
+    if (password) {
+      setButtonDisabled(false);
+    } else {
+      setButtonDisabled(true);
+    }
+  }, [password]);
 
   /* 
   const onLoginSubmit: SubmitHandler<FieldValues> = (data) => {
