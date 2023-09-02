@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import useFetch from '../../hooks/useFetch';
@@ -7,25 +7,37 @@ import ResponseRate from '../../components/ResponseRateTag/ResponseRate';
 import HashTag from '../../components/HashTags/HashTag';
 import AsideMenu from './components/AsideMenu';
 import Carousel from './components/Carousel';
+import { API_BASE_URL } from '../../config/config';
+import FrontAsideMenu from './components/FrontAsideMenu';
 
 const ListingDetail = () => {
   const { id } = useParams();
   console.log(`Params id: ${id}`);
 
-  const url = `/data/jobDetailData1.json`; //테스트용 mock data url
+  // const url = `/data/jobDetailData1.json`; //테스트용 mock data url
   // const url = `api/v1/employment/{employementId}/likes`;
-  // const url = `api/v1/employment/${id}/likes`; //최종 통신용 url
+  const url = `${API_BASE_URL}api/v1/employments/${id}`; //최종 통신용 url
 
   const { loading, data, error } = useFetch<JobDetailResponse>(url);
   // console.log('hook? ', data?.result);
   const jobData = data?.result;
   console.log('hook??? ', data?.result);
 
+  useEffect(() => {
+    fetch(url)
+      .then((res) => {
+        console.log('res? ', res);
+        return res.json();
+      })
+      .then((data) => {
+        console.log('useEffect 채용 상세 데이터 ✅? ', data);
+      });
+  }, []);
   return (
     <Container>
       <DetailMain>
         <MainListingSection>
-          <Carousel img={jobData?.imgUrls || []} />
+          <Carousel img='https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fcompany%2F2134%2Fdz1ns2td09zk9lh6__1080_790.jpg&w=1000&q=75' />
           <DetailTitleContainer>
             <JobTitle>{jobData?.employmentTitle}</JobTitle>
             <DetailInfoWrap>
@@ -124,11 +136,16 @@ const ListingDetail = () => {
             </MapBox>
           </LocationSection>
         </MainListingSection>
-        <AsideMenu
+        <FrontAsideMenu
           likeNum={jobData?.likeNum || 0}
           applicantReward={jobData?.applicantReward || '500000'}
           recommenderReward={jobData?.recommenderReward || '500000'}
         />
+        {/* <AsideMenu
+          likeNum={jobData?.likeNum || 0}
+          applicantReward={jobData?.applicantReward || '500000'}
+          recommenderReward={jobData?.recommenderReward || '500000'}
+        /> */}
       </DetailMain>
     </Container>
   );

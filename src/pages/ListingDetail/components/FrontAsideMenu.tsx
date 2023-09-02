@@ -14,14 +14,15 @@ import ProfileIcon from '../../../components/User/ProfileIcon';
 // 좋아요 아이콘
 import { faHeart as emptyHeart } from '@fortawesome/free-regular-svg-icons';
 import { faHeart as fullHeart } from '@fortawesome/free-solid-svg-icons';
+import { API_BASE_URL } from '../../../config/config';
 
 type AsideMenuProps = {
   likeNum: number;
-  applicantReward: number;
-  recommenderReward: number;
+  applicantReward: string;
+  recommenderReward: string;
 };
 
-const AsideMenu = ({
+const FrontAsideMenu = ({
   likeNum,
   applicantReward,
   recommenderReward,
@@ -36,7 +37,14 @@ const AsideMenu = ({
   async function toggleLike(employmentId: string) {
     try {
       const response = await axios.post(
-        `api/v1/employment/${employmentId}/likes`
+        `${API_BASE_URL}api/v1/employment/${employmentId}/likes`,
+        {},
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
 
       if (response.data.isSuccess) {
@@ -58,9 +66,9 @@ const AsideMenu = ({
   };
 
   // 로그인 유무 확인을 통한 좋아요 기능 사용 가능 여부 판단
-  // const token = localStorage.getItem('token'); //토큰 키 값 확인 필요!
+  const token = localStorage.getItem('token'); //토큰 키 값 확인 필요!
   // const token = false;
-  const token = true;
+  // const token = true;
 
   const handleLikeBtn = () => {
     if (token) {
@@ -280,4 +288,4 @@ const TomatoAnchorButton = styled(Button.withComponent("a"))`
 
 */
 
-export default AsideMenu;
+export default FrontAsideMenu;

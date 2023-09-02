@@ -18,6 +18,8 @@ import { API_BASE_URL } from '../../../config/config';
 type AsideMenuProps = {
   likeNum: number;
   applicantReward: string;
+  // applicantReward: number;
+  // recommenderReward: number;
   recommenderReward: string;
 };
 
@@ -29,7 +31,7 @@ const AsideMenu = ({
   // 좋아요 여부 (기능) 상태 관리
   // 좋아요 api 호출
   const { id } = useParams();
-  console.log('어사이드 메뉴에서의 id: ', id);
+  // console.log('어사이드 메뉴에서의 id: ', typeof id);
 
   const navigate = useNavigate();
 
@@ -37,19 +39,23 @@ const AsideMenu = ({
 
   // 로그인 유무 확인을 통한 좋아요 기능 사용 가능 여부 판단
   const token = localStorage.getItem('token');
+  //토큰 키 값 확인 필요!(로컬 스토리지에 저장된 키값은 프론트에서 정함!!) -> result로 변경?
+  // const token = false;
+  // const token = true;
 
   // 좋아요 버튼 클릭 시 + 토큰 있을 경우, url에 useParams id가 있을 경우 호출되는 좋아요 상태 업데이트 함수
   const updateLikeStatus = async () => {
     try {
-      // const requestBody = {
-      //   employmentId: id,
-      // };
+      /*  const requestBody = {
+        employmentId: id,
+        // token: token, //key 값 확인 필요 -> 헤더에 넣어서 보내야 함
+      }; */
 
       const response = await fetch(
-        `${API_BASE_URL}api/v1/employment/${id}/likes`,
+        `${API_BASE_URL}api/v1/employments/${id}/likes`,
         {
           method: 'POST',
-          // mode: 'cors',
+          mode: 'cors',
           headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`,
@@ -60,8 +66,7 @@ const AsideMenu = ({
 
       const data = await response.json();
 
-      if (data.isSuccess) {
-        // if (response.ok && data.isSuccess) {
+      if (response.ok && data.isSuccess) {
         console.log('좋아요 기능 성공 !!', data.message, data.code);
         return true;
       } else {

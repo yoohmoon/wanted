@@ -16,11 +16,7 @@ const JobCard = ({ job }: JobCardProps) => {
     <Container>
       <Link to={`/wd/${job.employmentId}`}>
         <div>
-          <HeadImg
-            img={
-              'https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fcompany%2F37778%2Fzc4vpxjizexcre5p__400_400.jpg&w=400&q=75'
-            }
-          />
+          <HeadImg img='https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fcompany%2F37778%2Fzc4vpxjizexcre5p__400_400.jpg&w=400&q=75' />
           <JobInfo>
             <JobTitle>{job.employmentTitle}</JobTitle>
             <Company>{job.companyName}</Company>
@@ -28,7 +24,7 @@ const JobCard = ({ job }: JobCardProps) => {
               <ResponseRate />
             </ResponseTag>
             <Address>{`${job.region} · 한국`}</Address>
-            <p>채용 보상금 {job.rewardSum / 10000}만원</p>
+            <p>채용 보상금 {job.rewardSum / 10}만원</p>
           </JobInfo>
         </div>
       </Link>

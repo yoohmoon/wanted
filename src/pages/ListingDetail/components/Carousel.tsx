@@ -2,7 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 
 type CarouselProps = {
-  img: string[];
+  img: string;
+  // img: string[];
 };
 
 const Carousel = ({ img }: CarouselProps) => {
@@ -15,7 +16,7 @@ const Carousel = ({ img }: CarouselProps) => {
           </div>
         ))} */}
         <CarouselItem>
-          <img src={img[0]} alt={img[0]} />
+          <img src={img} alt={img} />
         </CarouselItem>
       </CarouselWrapper>
     </Container>

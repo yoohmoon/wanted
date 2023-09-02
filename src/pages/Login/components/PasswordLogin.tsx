@@ -7,6 +7,7 @@ import { useRecoilValue } from 'recoil';
 import { emailState } from '../../../store/emailState';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { API_BASE_URL } from '../../../config/config';
 
 const PasswordLogin = () => {
   const emailRoot = useRecoilValue(emailState);
@@ -71,17 +72,18 @@ const PasswordLogin = () => {
 
   const onLoginSubmit: SubmitHandler<FieldValues> = async (data) => {
     try {
-      const response = await axios.post('api/v1/users/login', {
+      const response = await axios.post(`${API_BASE_URL}api/v1/users/login`, {
         email: emailRoot,
         password: data.password,
       });
 
-      if (response.data.resultCode === 'SUCCESS') {
-        localStorage.setItem('token', response.data.token);
+      if (response.data.isSuccess) {
+        // if (response.data.resultCode === 'SUCCESS') { // 데이터 구조 변경 전 코드 보존
+        localStorage.setItem('token', response.data.result);
         console.log(
           '로그인 성공 및 토큰 저장!',
-          response.data.result,
-          response.data.token
+          response.data.message,
+          response.data.result
         );
         clearErrors('password'); // 로그인 성공 시 에러 메시지 삭제
         setButtonDisabled(false); // 로그인 성공 시 버튼을 활성화
@@ -101,7 +103,7 @@ const PasswordLogin = () => {
       //   type: "manual",
       //   message: "서버 에러가 발생했습니다."
       // });
-      // setButtonDisabled(true);
+      // setButtonDisabled(true); //추후 불필요하다면 삭제
     }
   };
 

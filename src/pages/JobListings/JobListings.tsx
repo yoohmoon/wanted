@@ -2,12 +2,13 @@ import { useEffect, useState } from 'react';
 import { styled } from 'styled-components';
 import JobCard from '../../components/JobCard/JobCard';
 import { Job } from '../../types/jobListingTypes';
+import { API_BASE_URL } from '../../config/config';
 const JobListings = () => {
   const [cardData, setCardData] = useState<Job[]>([]);
 
   useEffect(() => {
-    // const apiUrl = 'api/v1/employements'; //최종 통신용 url
-    const apiUrl = `/data/cardData.json`;
+    const apiUrl = `${API_BASE_URL}api/v1/employments`; //최종 통신용 url
+    // const apiUrl = `/data/cardData.json`;
 
     // const response = await fetch(`/data/cardData.json`);
     // const job = await response.json();

@@ -10,6 +10,7 @@ import CountryCodeSelect from './CountryCodeSelect';
 import SingleInput from './SingleInput';
 import { useNavigate } from 'react-router-dom';
 import { loginStepState } from '../../../store/loginStepState';
+import { API_BASE_URL } from '../../../config/config';
 
 // RegExp 상수화
 const NAME_REGEX = /^[a-zA-Zㄱ-ㅎㅏ-ㅣ가-힣]*$/;
@@ -141,30 +142,42 @@ const SignUp = () => {
   // api 통신 로직
   const postSignUpData = async (data: FieldValues) => {
     try {
-      const response = await fetch('api/v1/users/join', {
+      // userType을 추가
+      const { email, name, phone, password, userType = 'GENERAL' } = data;
+      console.log('회원가입 데이터💩: ', email, name, password, userType);
+
+      const signUpData = {
+        password,
+        name,
+        email: emailRoot,
+        userType,
+        phoneNumber: phone,
+      };
+      const response = await fetch(`${API_BASE_URL}api/v1/users/join`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify(signUpData),
       });
 
       const result = await response.json();
-      setApiStatus(result.resultCode);
+      // setApiStatus(result.resultCode);
 
-      if (result.resultCode === 'SUCCESS') {
-        console.log('회원가입 성공');
+      if (result.isSuccess) {
+        console.log('회원가입 성공', result.message);
         // ✔️ 로그인 페이지로 이동(?!) 로직 구현 필요
+        alert('회원가입에 성공했습니다 🎉 ');
         navigate('/login'); // 필요 없을 듯?
         setStep('emailInput');
       } else {
-        console.log('회원가입 실패');
+        console.log('회원가입 실패', result.message, result.code);
         // 회원가입 실패시 로직 구현 필요 - 에러 메시지 출력 ?! alert?
         alert('회원가입에 실패했습니다.');
       }
     } catch (error) {
       console.log('API 호출 중 에러 발생: ', error);
-      setApiStatus('ERROR');
+      // setApiStatus('ERROR');
     }
   };
 
@@ -179,7 +192,8 @@ const SignUp = () => {
     const result = await response.json();
     console.log(result); 
   };*/
-
+  /* 
+  //이전 코드 보존(백엔드 통신 정보 변경 전)
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     console.log('회원가입 제출🙋‍♀️🙋‍♀️🙋‍♀️!', data);
 
@@ -194,15 +208,36 @@ const SignUp = () => {
     };
 
     postSignUpData(signUpData);
+  }; */
+
+  const onSubmit: SubmitHandler<FieldValues> = (data) => {
+    console.log('회원가입 제출', data);
+    data.userType = 'GENERAL';
+
+    console.log('회원가입 제출 - userType 추가 후🙋‍♀️🙋‍♀️🙋‍♀️!', data);
+
+    // const { email, name, phone, password } = data;
+
+    // const signUpData = {
+    //   // userId: Math.random() * 10000000,
+    //   userName: name,
+    //   email: email,
+    //   password: password,
+    //   phoneNumber: phone,
+    // };
+
+    postSignUpData(data);
   };
 
   //버튼 비활성화 조건
+  // const hasEmptyFields = !name || !password || !passwordConfirmation;
   const hasEmptyFields = !name || !phone || !password || !passwordConfirmation;
   const hasInputErrors =
     !!errors.name ||
     !!errors.phone ||
     !!errors.password ||
     !!errors.passwordConfirmation;
+
   const isButtonDisabled = hasEmptyFields || hasInputErrors;
 
   return (
@@ -216,9 +251,6 @@ const SignUp = () => {
           title='이메일'
           type='text'
           placeholder={emailRoot}
-          // register={register}
-          // validate={handleValidation}
-          // errors={errors}
           name='email'
           readOnly={true}
           isPhone={false}
@@ -248,16 +280,7 @@ const SignUp = () => {
         >
           <CountryCodeSelect />
         </InputForm>
-        {/* <InputForm
-          title='휴대폰 번호'
-          type='number'
-          placeholder='(예시) 01012345678'
-          register={register}
-          validate={handlePhoneValidation}
-          errors={errors}
-          name='phone'
-          readOnly={false}
-        ></InputForm> */}
+
         <SingleInput
           placeholder='인증번호를 입력해주세요.'
           type='text'
