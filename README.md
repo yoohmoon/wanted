@@ -58,6 +58,16 @@ src
 ![React](https://img.shields.io/badge/-React-222222?style=for-the-badge&logo=react)
 ![Styled Components](https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white)
 
+---
+
+## Login Process
+
+
+
+https://github.com/yoohmoon/wanted/assets/121086010/fa8aa43b-47d9-4404-bbbf-8fa626c9dd14
+
+
+
 ## Available Script
 
 In the project directory, you can run:
