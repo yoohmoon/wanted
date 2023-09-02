@@ -1,7 +1,7 @@
 import React from 'react';
-import { styled } from 'styled-components';
-import { Job } from '../../types/jobListingTypes';
+import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { Job } from '../../types/jobListingTypes';
 import ResponseRate from '../ResponseRateTag/ResponseRate';
 
 interface JobCardProps {
@@ -10,20 +10,21 @@ interface JobCardProps {
 
 const JobCard = ({ job }: JobCardProps) => {
   console.log(job);
+  console.log('in question! ', job.employmentId);
 
   return (
     <Container>
-      <Link to={`/wd/${job.companyId}`}>
+      <Link to={`/wd/${job.employmentId}`}>
         <div>
-          <HeadImg img={job.img} />
+          <HeadImg img='https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fcompany%2F37778%2Fzc4vpxjizexcre5p__400_400.jpg&w=400&q=75' />
           <JobInfo>
             <JobTitle>{job.employmentTitle}</JobTitle>
-            <Company>{job.companyname}</Company>
+            <Company>{job.companyName}</Company>
             <ResponseTag>
               <ResponseRate />
             </ResponseTag>
-            <Address>{job.address}</Address>
-            <p>채용 보상금 {job.reward}만원</p>
+            <Address>{`${job.region} · 한국`}</Address>
+            <p>채용 보상금 {job.rewardSum / 10}만원</p>
           </JobInfo>
         </div>
       </Link>

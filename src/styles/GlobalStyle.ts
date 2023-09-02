@@ -83,12 +83,48 @@ code {
         /* font-weight: 600; */
     }
 
+    @font-face {
+        font-family: 'Pretendard-Black';
+        src: url('/fonts/Pretendard-Black.woff2');
+        font-style: normal;
+        /* font-weight: 600; */
+    }
+
+    @font-face {
+        font-family: 'Pretendard-Regular';
+        src: url('/fonts/Pretendard-Regular.woff2');
+        font-style: normal;
+        /* font-weight: 600; */
+    }
+
+    @font-face {
+        font-family: 'Pretendard-Medium';
+        src: url('/fonts/Pretendard-Medium.woff2');
+        font-style: normal;
+        /* font-weight: 600; */
+    }
+
+    @font-face {
+        font-family: 'Pretendard-SemiBold';
+        src: url('/fonts/Pretendard-SemiBold.woff2');
+        font-style: normal;
+        /* font-weight: 600; */
+    }
+
+    @font-face {
+        font-family: 'Pretendard-Light';
+        src: url('/fonts/Pretendard-Light.woff2');
+        font-style: normal;
+        /* font-weight: 600; */
+    }
+
     li{
       list-style: none;
     }
 
     *{
       color: ${(props) => props.theme.mainBlack};
+      box-sizing: border-box;
     }
 
     a{

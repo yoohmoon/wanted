@@ -1,0 +1,42 @@
+{
+  "isSuccess": true,
+  "code": 1000,
+  "message": "요청에 성공하였습니다.",
+  "result": {
+    "likeModalResDto": [
+      {
+        "userId": 1,
+        "userNames": "username1"
+      },
+      {
+        "userId": 2,
+        "userNames": "username2"
+      },
+      {
+        "userId": 3,
+        "userNames": "name3"
+      },
+      {
+        "userId": 3,
+        "userNames": "name3"
+      },
+      {
+        "userId": 3,
+        "userNames": "name3"
+      },
+      {
+        "userId": 3,
+        "userNames": "name3"
+      },
+      {
+        "userId": 3,
+        "userNames": "name3"
+      },
+      {
+        "userId": 3,
+        "userNames": "name3"
+      }
+    ],
+    "likesNum": 3
+  }
+}

@@ -10,17 +10,24 @@ export interface ThemeTag {
 
 export interface JobDetail {
   images: Image[];
-  themeTags: ThemeTag[];
+  // hashtagName: ThemeTag[];
+  hashtagName: string[];
   employmentTitle: string;
-  employmentContents: string;
-  addressShort: string;
+  employmentContent: string;
+  // addressShort: string;
+  region: string;
   address: string;
   deadline: string;
   applicantReward: string;
-  reward: string;
+  // applicantReward: number;
+  // reward: string;
   recommenderReward: string;
-  companyname: string;
+  // recommenderReward: number;
+  companyName: string;
   companyId: number;
+  skillStack: string[];
+  imgUrls: string[];
+  likeNum: number;
 }
 
 export interface JobDetailResponse {

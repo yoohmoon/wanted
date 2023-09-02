@@ -20,18 +20,18 @@ src
 │ │ └── heart.jpg
 │ └──
 ├── components
-│ └── Nav
-│ ├── Nav.tsx
-│ └──
+│ ├──Nav
+│ │ └──Nav.tsx
+│ │ └── components
+│ │   └──Logo.tsx
+│ ├──ResponseRateTag
+│ │ └── ResponseRateTag.tsx
+
 ├── pages
-│ ├── codeKim
-│ │ ├── Login
-│ │ │ ├── Login.tsx
-│ │ │ └──
-│ │ └── Main
-│ │ ├── Main.tsx
-│ │ └──
-│ └── gaebalKim
+│ ├── JobListings
+│ │ └── JobListings.tsx
+│ ├── ListingDetail
+│ │ └──  ListingDetail.tsx
 │ ├── Login
 │ │ ├── Login.tsx
 │ │ └──
@@ -45,6 +45,18 @@ src
 ├── Router.tsx
 └── index.tsx
 ```
+
+<br/>
+
+---
+
+## Tech
+
+<h2> tech stack 📚 </h2>
+
+![TypeScript](https://img.shields.io/badge/-TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+![React](https://img.shields.io/badge/-React-222222?style=for-the-badge&logo=react)
+![Styled Components](https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white)
 
 ## Available Script
 
