@@ -1,4 +1,5 @@
 export interface Job {
+  employmentId: number;
   img: string;
   employmentTitle: string;
   employmentContents: string;

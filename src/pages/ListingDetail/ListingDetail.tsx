@@ -1,14 +1,21 @@
 import React from 'react';
-import { styled } from 'styled-components';
-import ResponseRate from '../../components/ResponseRateTag/ResponseRate';
-import HashTag from '../../components/HashTags/HashTag';
+import { useParams } from 'react-router-dom';
+import styled from 'styled-components';
 import useFetch from '../../hooks/useFetch';
 import { JobDetailResponse } from '../../types/jobDetailType';
+import ResponseRate from '../../components/ResponseRateTag/ResponseRate';
+import HashTag from '../../components/HashTags/HashTag';
 import AsideMenu from './components/AsideMenu';
 import Carousel from './components/Carousel';
 
 const ListingDetail = () => {
-  const url = `/data/jobDetailData1.json`;
+  const { id } = useParams();
+  console.log(`Params id: ${id}`);
+
+  const url = `/data/jobDetailData1.json`; //테스트용 mock data url
+  // const url = `api/v1/employment/{employementId}/likes`;
+  // const url = `api/v1/employment/${id}/likes`; //최종 통신용 url
+
   const { loading, data, error } = useFetch<JobDetailResponse>(url);
   // console.log('hook? ', data?.result);
   const jobData = data?.result;

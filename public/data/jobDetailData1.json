@@ -2,6 +2,7 @@
   "resultCode": "SUCCESS",
   "message": "채용공고 작성이 완료되었습니다.",
   "result": {
+    "employmentId": 1,
     "images": [
       {
         "id": 1,

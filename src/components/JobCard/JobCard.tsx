@@ -10,10 +10,11 @@ interface JobCardProps {
 
 const JobCard = ({ job }: JobCardProps) => {
   console.log(job);
+  console.log('in question! ', job.employmentId);
 
   return (
     <Container>
-      <Link to={`/wd/${job.companyId}`}>
+      <Link to={`/wd/${job.employmentId}`}>
         <div>
           <HeadImg img={job.img} />
           <JobInfo>

@@ -6,10 +6,13 @@ const JobListings = () => {
   const [cardData, setCardData] = useState<Job[]>([]);
 
   useEffect(() => {
+    // const apiUrl = 'api/v1/employements';
+    const apiUrl = `/data/cardData.json`;
+
     // const response = await fetch(`/data/cardData.json`);
     // const job = await response.json();
 
-    fetch(`/data/cardData.json`)
+    fetch(apiUrl)
       .then((res) => res.json())
       .then((data) => setCardData(data.result));
   }, []);
