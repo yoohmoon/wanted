@@ -47,16 +47,24 @@ const ListingDetail = () => {
             <ul>
               <DetailedList>
                 <ListTitle>마감일</ListTitle>
-                <p>2023.09.10</p>
+                <p>{jobData?.deadline}</p>
               </DetailedList>
               <DetailedList>
                 <ListTitle>근무지역</ListTitle>
-                <p>서울특별시 서초구 서초대로27길 54, 1층</p>
+                <p>{jobData?.address}</p>
               </DetailedList>
             </ul>
+            <MapBox>
+              <img src='/images/ListingDetail/map.png' alt='naver map' />
+            </MapBox>
           </LocationSection>
         </MainListingSection>
-        <AsideMenu />
+        <AsideMenu
+          // jobData={jobData || { applicantReward: 500000 }}
+          likeNum={jobData?.likeNum || 0}
+          applicantReward={jobData?.applicantReward || '500,000'}
+          recommenderReward={jobData?.recommenderReward || '500,000'}
+        />
       </DetailMain>
     </Container>
   );
@@ -139,6 +147,15 @@ const DetailedList = styled.li`
 const ListTitle = styled.h4`
   width: 80px;
   color: ${(props) => props.theme.textGray};
+`;
+
+const MapBox = styled.div`
+  width: 100%;
+  padding-right: 20px;
+
+  img {
+    width: 100%;
+  }
 `;
 
 export default ListingDetail;

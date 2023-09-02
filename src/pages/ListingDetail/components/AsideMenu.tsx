@@ -6,7 +6,17 @@ import BookmarkSvg from './BookmarkSvg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
-const AsideMenu = () => {
+type AsideMenuProps = {
+  likeNum: number;
+  applicantReward: string;
+  recommenderReward: string;
+};
+
+const AsideMenu = ({
+  likeNum,
+  applicantReward,
+  recommenderReward,
+}: AsideMenuProps) => {
   return (
     <Container>
       <ShareBtnContainer>
@@ -17,11 +27,11 @@ const AsideMenu = () => {
         <RewardList>
           <li>
             <h4>추천인</h4>
-            <p>500,000원</p>
+            <p>{recommenderReward}원</p>
           </li>
           <li>
             <h4>지원자</h4>
-            <p>500,000원</p>
+            <p>{applicantReward}원</p>
           </li>
         </RewardList>
       </div>
@@ -39,7 +49,7 @@ const AsideMenu = () => {
       <LikeBtnWrap>
         <LikeButton>
           <FontAwesomeIcon icon={faHeart} style={{ color: '#eee' }} />
-          <span>0</span>
+          <span>{likeNum}</span>
         </LikeButton>
       </LikeBtnWrap>
     </Container>

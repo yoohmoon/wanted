@@ -23,6 +23,7 @@ export interface JobDetail {
   companyId: number;
   tech: string[];
   imgUrls: string[];
+  likeNum: number;
 }
 
 export interface JobDetailResponse {
