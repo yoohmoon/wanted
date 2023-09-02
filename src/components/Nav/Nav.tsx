@@ -8,6 +8,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { styled } from 'styled-components';
 import Logo from './components/Logo';
+import ProfileIcon from '../User/ProfileIcon';
 
 const Nav = () => {
   const [clickedNav, setClickedNav] = useState<number | null>(null);
@@ -16,9 +17,9 @@ const Nav = () => {
   };
 
   // 🙋‍♀️ 이렇게만 토큰 유무 확인하면 되나요??
-  const token = localStorage.getItem('token'); // 토큰 키 값 확인 필요
+  // const token = localStorage.getItem('token'); // 토큰 키 값 확인 필요
   // const token = false;
-  // const token = true;
+  const token = true;
 
   return (
     <Container>
@@ -63,7 +64,7 @@ const Nav = () => {
                 /> */}
                 <FontAwesomeIcon icon={faBell} size='lg' />
                 <AvatarWrap>
-                  <Avatar></Avatar>
+                  <ProfileIcon />
                 </AvatarWrap>
               </TokenUI>
             ) : (
@@ -203,16 +204,6 @@ const AvatarWrap = styled.div`
   border: 1px solid ${({ theme }) => theme.borderGray};
   overflow: hidden;
   cursor: pointer;
-`;
-
-const Avatar = styled.div`
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background-image: url(https://s3.ap-northeast-2.amazonaws.com/wanted-public/profile_default.png),
-    url(https://static.wanted.co.kr/images/profile_default.png);
-  background-size: cover;
-  background-repeat: no-repeat;
 `;
 
 const SignIn = styled.li`

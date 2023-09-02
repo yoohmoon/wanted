@@ -5,6 +5,7 @@ import ShareSvg from './ShareSvg';
 import BookmarkSvg from './BookmarkSvg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import ProfileIcon from '../../../components/User/ProfileIcon';
 
 type AsideMenuProps = {
   likeNum: number;
@@ -51,6 +52,34 @@ const AsideMenu = ({
           <FontAwesomeIcon icon={faHeart} style={{ color: '#eee' }} />
           <span>{likeNum}</span>
         </LikeButton>
+        <LikedUsersButton>
+          {likeNum === 0 || !likeNum ? (
+            ''
+          ) : likeNum === 1 ? (
+            <ProfileIcon isLiked={true} />
+          ) : likeNum === 2 ? (
+            <LikedUsersWrap>
+              <FirstIconWrapper>
+                <ProfileIcon isLiked={true} />
+              </FirstIconWrapper>
+              <IconWrapper>
+                <ProfileIcon isLiked={true} />
+              </IconWrapper>
+            </LikedUsersWrap>
+          ) : (
+            <LikedUsersWrap>
+              <FirstIconWrapper>
+                <ProfileIcon isLiked={true} />
+              </FirstIconWrapper>
+              <IconWrapper>
+                <ProfileIcon isLiked={true} />
+              </IconWrapper>
+              <LastIconWrapper>
+                <ProfileIcon isLiked={true} />
+              </LastIconWrapper>
+            </LikedUsersWrap>
+          )}
+        </LikedUsersButton>
       </LikeBtnWrap>
     </Container>
   );
@@ -105,6 +134,9 @@ const RewardList = styled.ul`
 
 const LikeBtnWrap = styled.div`
   margin-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
 `;
 
 const LikeButton = styled.button`
@@ -126,5 +158,39 @@ const LikeButton = styled.button`
     background-color: rgba(0, 0, 0, 0.04);
   }
 `;
+
+const LikedUsersButton = styled.button`
+  flex-grow: 1;
+  background-color: #fff;
+  border: none;
+  cursor: pointer;
+`;
+
+const FirstIconWrapper = styled.div`
+  z-index: 3;
+`;
+
+const IconWrapper = styled.div`
+  margin-left: -12px;
+  z-index: 2;
+`;
+
+const LastIconWrapper = styled(IconWrapper)`
+  z-index: 1;
+`;
+
+const LikedUsersWrap = styled.div`
+  display: flex;
+  gap: 2px;
+`;
+
+/* 
+// A new component based on Button, but with some override styles
+// Button의 속성을 상속 받아 새로운 anchor 태그를 생성
+const TomatoAnchorButton = styled(Button.withComponent("a"))`
+  color: tomato;
+  border-color: tomato;
+
+*/
 
 export default AsideMenu;
