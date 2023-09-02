@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useRecoilState, useSetRecoilState } from 'recoil';
+import axios from 'axios';
 import { useBodyScrollLock } from '../../../hooks/useBodyScrollLock';
 import { modalState } from '../../../store/modalState';
 import { likeState } from '../../../store/likeState';
@@ -32,40 +33,23 @@ const AsideMenu = ({
 
   const navigate = useNavigate();
 
-  const [isLikeBtnClicked, setIsLikedBtnClicked] = useRecoilState(likeState);
-
-  // 로그인 유무 확인을 통한 좋아요 기능 사용 가능 여부 판단
-  // const token = localStorage.getItem('token');
-  //토큰 키 값 확인 필요!(로컬 스토리지에 저장된 키값은 프론트에서 정함!!) -> result로 변경?
-  // const token = false;
-  const token = true;
-
-  // 좋아요 버튼 클릭 시 + 토큰 있을 경우, url에 useParams id가 있을 경우 호출되는 좋아요 상태 업데이트 함수
-  const updateLikeStatus = async () => {
+  async function toggleLike(employmentId: string) {
     try {
-      const requestBody = {
-        employmentId: id,
-        // token: token, //key 값 확인 필요 -> 헤더에 넣어서 보내야 함
-      };
+      const response = await axios.post(
+        `api/v1/employment/${employmentId}/likes`
+      );
 
-      const response = await fetch(`api/v1/employment/${id}/likes`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(requestBody),
-      });
-
-      const data = await response.json();
-      if (data.isSuccess) {
+      if (response.data.isSuccess) {
+        console.log('좋아요 토글 성공!');
       } else {
-        console.error('좋아요 상태 업데이트 실패');
+        console.log('좋아요 토글 실패!');
       }
     } catch (error) {
-      console.error('좋아요 상태 업데이트 에러', error);
+      console.log('에러 발생! ', error);
     }
-  };
+  }
+
+  const [isLikeBtnClicked, setIsLikedBtnClicked] = useRecoilState(likeState);
 
   //좋아요 유무에 따라 아이콘 변경
   const heartMode = {
@@ -73,11 +57,16 @@ const AsideMenu = ({
     true: fullHeart,
   };
 
+  // 로그인 유무 확인을 통한 좋아요 기능 사용 가능 여부 판단
+  // const token = localStorage.getItem('token'); //토큰 키 값 확인 필요!
+  // const token = false;
+  const token = true;
+
   const handleLikeBtn = () => {
     if (token) {
       if (id) {
         setIsLikedBtnClicked(!isLikeBtnClicked);
-        updateLikeStatus(); //좋아요 상태 업데이트 api 함수 호출
+        toggleLike(id);
       }
     } else {
       navigate('/login');
@@ -129,8 +118,13 @@ const AsideMenu = ({
             size='lg'
             isLikeBtnClicked={isLikeBtnClicked}
           />
-
-          <span>{likeNum}</span>
+          {/* <StyledLikeIcon
+            icon={faHeart}
+            isLikeBtnClicked={isLikeBtnClicked}
+            // color={isLiked ? '#fe415c' : '#eee'}
+            // style={{ color: isLiked ? 'red' : '#eee' }}
+          /> */}
+          <span>{isLikeBtnClicked ? likeNum + 1 : likeNum}</span>
         </LikeButton>
         <LikedUsersButton onClick={openModal}>
           {likeNum === 0 || !likeNum ? (
@@ -236,6 +230,15 @@ const LikeButton = styled.button`
 
   &:hover {
     background-color: rgba(0, 0, 0, 0.04);
+  }
+`;
+
+const StyledLikeIcon = styled(FontAwesomeIcon)<{ isLikeBtnClicked: boolean }>`
+  color: 'red';
+  /* color: ${(props) => (props.isLikeBtnClicked ? 'red' : 'grey')}; */
+
+  i {
+    color: red;
   }
 `;
 
