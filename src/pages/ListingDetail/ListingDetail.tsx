@@ -29,22 +29,80 @@ const ListingDetail = () => {
           <DetailTitleContainer>
             <JobTitle>{jobData?.employmentTitle}</JobTitle>
             <DetailInfoWrap>
-              <div>{jobData?.companyname}</div>
+              <div>{jobData?.companyName}</div>
               <ResponseRate />
               <Separator />
-              <AddressShort>{jobData?.addressShort}</AddressShort>
+              <AddressShort>{jobData?.region} · 한국</AddressShort>
             </DetailInfoWrap>
             <ThemeTagsContainer>
-              {jobData?.themeTags.map((theme) => (
-                <HashTag text={theme.title} />
+              {jobData?.hashtagName.map((theme, index) => (
+                <HashTag text={`# ${theme}`} key={index} />
               ))}
             </ThemeTagsContainer>
           </DetailTitleContainer>
           <DetailContentSection>
-            <MainContent>{jobData?.employmentContents} </MainContent>
+            <MainContent>
+              <CompanyIntro>
+                <h3>[회사소개]</h3>
+                <p>{jobData?.employmentContent}</p>
+              </CompanyIntro>
+              <CompanyIntro>
+                <h3>[채용배경]</h3>
+                <p>
+                  IT기업이 좋은 서비스를 만드는 것 이외에 사회에 기여할 수 있는
+                  방법은 무엇이 있을까요? {jobData?.companyName}은 신입개발자를
+                  훌륭하게 육성하는 것이 그 방법 중 하나라고 믿고 있어요!
+                </p>
+                <br />
+                <p>
+                  아직 회사 규모가 크지 않아 많이 채용할 순 없지만, 매년
+                  일정하게 신입 개발자를 채용하고 있습니다. 입사하시게 되면 선배
+                  개발자가 꼼꼼하게 챙겨주며 즐겁게 일하고 성장할 수 있을거에요.
+                </p>
+                <br />
+                <p>
+                  신입 개발자를 멋진 경력직 개발자로 성장시키는 것은
+                  {` ${jobData?.companyName}`}, 가장 자신있으니 많은 관심
+                  부탁드려요!
+                </p>
+              </CompanyIntro>
+              <Qualification>
+                <h3>주요 업무</h3>
+                <li>- React를 활용한 크티 플랫폼 프론트엔드 개발</li>
+              </Qualification>
+              <Qualification>
+                <h3>자격 요건</h3>
+                <li>- 경력 3년 이상</li>
+                <li>
+                  - React를 사용한 상용 웹 애플리케이션 개발 및 유지보수에
+                  경험이 있는 분
+                </li>
+                <li>
+                  - JavaScript, HTML, CSS 등 웹 프론트엔드 기술에 능숙한 분
+                </li>
+                <li>- RESTful API와의 상호 작용 경험이 있는 분</li>
+              </Qualification>
+              <Qualification>
+                <h3>우대사항</h3>
+                <li>- Laravel(PHP) 다뤄본 경험</li>
+                <li>- UI/UX 디자인 및 기획에 대한 이해와 경험이 많으신 분</li>
+                <li>- 더 나은 로직 개발을 위해 항상 고민하는 분</li>
+                <li>- 긍정적인 커뮤니케이션</li>
+              </Qualification>
+              <Qualification>
+                <h3>혜택 및 복지</h3>
+                <li>
+                  - 유연 근무제 (오전 11시 이전 자율 출근, 4시 이후 자율 퇴근,
+                  8시간 근무)
+                </li>
+                <li>- 금요일 2시간 단축 근무 (주 38시간)</li>
+                <li>- 야근 없음</li>
+                <li>- 법정 휴가</li>
+              </Qualification>
+            </MainContent>
             <div>
               <TechStack>기술스택 ・ 툴</TechStack>
-              {jobData?.tech.map((tag, index) => (
+              {jobData?.skillStack.map((tag, index) => (
                 <HashTag text={tag} isTech={true} key={index} />
               ))}
             </div>
@@ -68,8 +126,8 @@ const ListingDetail = () => {
         </MainListingSection>
         <AsideMenu
           likeNum={jobData?.likeNum || 0}
-          applicantReward={jobData?.applicantReward || 500000}
-          recommenderReward={jobData?.recommenderReward || 500000}
+          applicantReward={jobData?.applicantReward || '500000'}
+          recommenderReward={jobData?.recommenderReward || '500000'}
         />
       </DetailMain>
     </Container>
@@ -134,6 +192,19 @@ const HorizontalLine = styled.hr`
 
 const MainContent = styled.p`
   /* padding-right: 20px; */
+  line-height: 27px;
+
+  h3 {
+    font-weight: 600;
+  }
+`;
+
+const CompanyIntro = styled.div`
+  margin-bottom: 30px;
+`;
+
+const Qualification = styled.ul`
+  margin-bottom: 30px;
 `;
 
 const TechStack = styled.h6`

@@ -16,8 +16,10 @@ import { faHeart as fullHeart } from '@fortawesome/free-solid-svg-icons';
 
 type AsideMenuProps = {
   likeNum: number;
-  applicantReward: number;
-  recommenderReward: number;
+  applicantReward: string;
+  // applicantReward: number;
+  // recommenderReward: number;
+  recommenderReward: string;
 };
 
 const AsideMenu = ({

@@ -7,6 +7,7 @@ import { UserType } from '../../../types/likedUsersType';
 import { useSetRecoilState } from 'recoil';
 import { modalState } from '../../../store/modalState';
 import { useBodyScrollLock } from '../../../hooks/useBodyScrollLock';
+import { useParams } from 'react-router-dom';
 
 const Modal = () => {
   const setIsModalOpen = useSetRecoilState(modalState);
@@ -21,10 +22,13 @@ const Modal = () => {
     setIsModalOpen(false);
   };
 
+  const { id } = useParams();
+
   useEffect(() => {
     // get api fetching
     const apiUrl = '/data/likedUsersData.json';
     // const apiUrl = `api/v1/employment/{employmentId}/likes`;  // ‼ 여기서 employmentId는 실제 id 값으로 대체해야 함
+    // const apiUrl = `api/v1/employment/${id}/likes`; // 최종 통신용 코드
     fetch(apiUrl)
       .then((res) => {
         return res.json();
