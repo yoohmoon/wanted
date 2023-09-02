@@ -16,9 +16,9 @@ export interface JobDetail {
   addressShort: string;
   address: string;
   deadline: string;
-  applicantReward: string;
+  applicantReward: number;
   reward: string;
-  recommenderReward: string;
+  recommenderReward: number;
   companyname: string;
   companyId: number;
   tech: string[];

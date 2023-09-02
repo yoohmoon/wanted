@@ -9,8 +9,8 @@ import ProfileIcon from '../../../components/User/ProfileIcon';
 
 type AsideMenuProps = {
   likeNum: number;
-  applicantReward: string;
-  recommenderReward: string;
+  applicantReward: number;
+  recommenderReward: number;
 };
 
 const AsideMenu = ({

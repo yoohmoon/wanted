@@ -1,21 +1,27 @@
 import React from 'react';
-import Nav from '../Nav/Nav';
 import { Outlet } from 'react-router-dom';
+import styled from 'styled-components';
+import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
-import { styled } from 'styled-components';
+import { useRecoilState } from 'recoil';
+import { modalState } from '../../store/modalState';
+import Modal from './ModalComponents/Modal';
 
 const MainLayout = () => {
+  const [isModalOpen, setIsModalOpen] = useRecoilState(modalState);
   return (
-    <>
+    <Container>
       <Nav />
       <Wrapper>
         <Outlet />
       </Wrapper>
-
-      <Footer />
-    </>
+      {/* <Footer /> */}
+      {isModalOpen && <Modal />}
+    </Container>
   );
 };
+
+const Container = styled.div``;
 
 const Wrapper = styled.div`
   /* margin: 0 226px; */

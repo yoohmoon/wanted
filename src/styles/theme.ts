@@ -14,6 +14,8 @@ const theme = {
   loginGray: '#888888',
   alertRed: '#fe415c',
   disabledGray: '#f2f4f7',
+  modalGray: '#f8f8fa',
+  modalText: '#b5b5b5',
   mainFont: 'PretendardVariable',
   fontBlack: 'Pretendard-Black',
   fontReg: 'Pretendard-Regular',

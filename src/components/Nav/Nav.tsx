@@ -17,9 +17,9 @@ const Nav = () => {
   };
 
   // 🙋‍♀️ 이렇게만 토큰 유무 확인하면 되나요??
-  // const token = localStorage.getItem('token'); // 토큰 키 값 확인 필요
+  const token = localStorage.getItem('token'); // 토큰 키 값 확인 필요
   // const token = false;
-  const token = true;
+  // const token = true;
 
   return (
     <Container>

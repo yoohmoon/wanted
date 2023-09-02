@@ -61,8 +61,8 @@ const ListingDetail = () => {
         </MainListingSection>
         <AsideMenu
           likeNum={jobData?.likeNum || 0}
-          applicantReward={jobData?.applicantReward || '500,000'}
-          recommenderReward={jobData?.recommenderReward || '500,000'}
+          applicantReward={jobData?.applicantReward || 500000}
+          recommenderReward={jobData?.recommenderReward || 500000}
         />
       </DetailMain>
     </Container>
