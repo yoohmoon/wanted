@@ -39,9 +39,29 @@
       { "id": 4, "title": "#교육비" },
       { "id": 5, "title": "#자기계발" },
       { "id": 6, "title": "#핀테크" },
-      { "id": 7, "title": "#IT, 컨텐츠" }
+      { "id": 7, "title": "#IT, 컨텐츠" },
+      { "id": 8, "title": "#행복 기업" },
+      { "id": 79, "title": "#복지 기업" }
     ],
-
+    "tech": [
+      "React",
+      "Svelte",
+      "NodeJS",
+      "JavaScript",
+      "Sveltekit",
+      "Next.js",
+      "AWS",
+      "HTML",
+      "TailwindCSS",
+      "DevOps"
+    ],
+    "imgUrls": [
+      "https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fcompany%2F21539%2Ftoh64lqol001qgwi__1080_790.jpg&w=1000&q=75",
+      "https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fcompany%2F21539%2Fyx10rgqotlzdjekb__1080_790.jpg&w=1000&q=75",
+      "https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fcompany%2F21539%2Fug6zgkothi3ozqsb__1080_790.jpg&w=1000&q=75",
+      "https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fcompany%2F21539%2Fxhdpymzziuzcxznd__1080_790.jpg&w=1000&q=75",
+      "https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fcompany%2F21539%2Fopahpuet4meqkzv5__1080_790.jpg&w=1000&q=75"
+    ],
     "employmentTitle": "QA 엔지니어",
     "employmentContents": "아이엠폼에서 찾는 QA 엔지니어는 웹 서비스, 솔루션 개발을 위한 기획 단계에서부터 서비스를 분석하고 테스트 환경을 구축하며, 개발 과정 동안  테스트를 진행하면서 프로젝트의 성공을 돕는 역할을 하는 사람입니다.",
     "addressShort": "서울.한국",

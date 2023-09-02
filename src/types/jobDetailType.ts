@@ -21,6 +21,8 @@ export interface JobDetail {
   recommenderReward: string;
   companyname: string;
   companyId: number;
+  tech: string[];
+  imgUrls: string[];
 }
 
 export interface JobDetailResponse {

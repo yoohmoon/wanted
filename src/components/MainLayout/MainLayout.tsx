@@ -18,7 +18,8 @@ const MainLayout = () => {
 };
 
 const Wrapper = styled.div`
-  margin: 0 226px;
+  /* margin: 0 226px; */
+  margin: 0 calc(100vw * 0.1494709);
   padding-top: 50px;
 `;
 
