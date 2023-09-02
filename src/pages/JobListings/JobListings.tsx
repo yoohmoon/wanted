@@ -6,7 +6,7 @@ const JobListings = () => {
   const [cardData, setCardData] = useState<Job[]>([]);
 
   useEffect(() => {
-    // const apiUrl = 'api/v1/employements';
+    // const apiUrl = 'api/v1/employements'; //최종 통신용 url
     const apiUrl = `/data/cardData.json`;
 
     // const response = await fetch(`/data/cardData.json`);
@@ -30,7 +30,7 @@ const JobListings = () => {
     <Container>
       <JobCardsBox>
         {cardData.map((job) => (
-          <JobCard key={job.companyId} job={job} />
+          <JobCard key={job.employmentId} job={job} />
         ))}
       </JobCardsBox>
     </Container>

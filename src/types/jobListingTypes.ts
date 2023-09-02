@@ -1,12 +1,9 @@
 export interface Job {
   employmentId: number;
-  img: string;
   employmentTitle: string;
-  employmentContents: string;
-  address: string;
+  rewardSum: number;
+  region: string;
   applicantReward: string;
-  reward: string;
-  recommenderReward: string;
-  companyname: string;
+  companyName: string;
   companyId: number;
 }
