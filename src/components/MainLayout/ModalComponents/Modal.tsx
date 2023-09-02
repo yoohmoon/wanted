@@ -4,10 +4,22 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faX } from '@fortawesome/free-solid-svg-icons';
 import ProfileIcon from '../../User/ProfileIcon';
 import { UserType } from '../../../types/likedUsersType';
+import { useSetRecoilState } from 'recoil';
+import { modalState } from '../../../store/modalState';
+import { useBodyScrollLock } from '../../../hooks/useBodyScrollLock';
 
 const Modal = () => {
+  const setIsModalOpen = useSetRecoilState(modalState);
+
   const [likedUsersData, setLikedUsersData] = useState<UserType[] | null>(null);
   const [likesSum, setLikesSum] = useState(0);
+
+  const { lockScroll, openScroll } = useBodyScrollLock();
+
+  const closeModal = () => {
+    openScroll();
+    setIsModalOpen(false);
+  };
 
   useEffect(() => {
     // get api fetching
@@ -32,7 +44,7 @@ const Modal = () => {
         <Header>
           <h5>이 포지션을 좋아한 사람들</h5>
           <CloseBtn>
-            <FontAwesomeIcon icon={faX} />
+            <FontAwesomeIcon icon={faX} onClick={closeModal} />
           </CloseBtn>
         </Header>
         <ModalContents>
@@ -92,11 +104,12 @@ const CloseBtn = styled.button`
   right: 15px;
   padding: 8px 10px;
   border: none;
+  border-radius: 50%;
+
   background-color: #fff;
   cursor: pointer;
 
   &:hover {
-    border-radius: 50%;
     background-color: rgba(0, 0, 0, 0.04);
   }
 `;

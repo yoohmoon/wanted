@@ -6,6 +6,9 @@ import BookmarkSvg from './BookmarkSvg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import ProfileIcon from '../../../components/User/ProfileIcon';
+import { useSetRecoilState } from 'recoil';
+import { modalState } from '../../../store/modalState';
+import { useBodyScrollLock } from '../../../hooks/useBodyScrollLock';
 
 type AsideMenuProps = {
   likeNum: number;
@@ -18,6 +21,15 @@ const AsideMenu = ({
   applicantReward,
   recommenderReward,
 }: AsideMenuProps) => {
+  const setIsModalOpen = useSetRecoilState(modalState);
+
+  const { lockScroll, openScroll } = useBodyScrollLock();
+
+  const openModal = () => {
+    lockScroll();
+    setIsModalOpen(true);
+  };
+
   return (
     <Container>
       <ShareBtnContainer>
@@ -52,7 +64,7 @@ const AsideMenu = ({
           <FontAwesomeIcon icon={faHeart} style={{ color: '#eee' }} />
           <span>{likeNum}</span>
         </LikeButton>
-        <LikedUsersButton>
+        <LikedUsersButton onClick={openModal}>
           {likeNum === 0 || !likeNum ? (
             ''
           ) : likeNum === 1 ? (
